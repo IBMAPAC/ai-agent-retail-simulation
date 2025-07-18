@@ -7,6 +7,7 @@
   --secondary-text: #718096; /* Medium Gray */
   --primary-accent: #3b82f6; /* A calmer blue */
   --primary-accent-hover: #2563eb;
+  --challenge-accent: #e53e3e; /* Red for challenges */
   --background-light: #f7fafc; /* Light Gray */
   --background-white: #ffffff;
   --border-color: #e2e8f0;
@@ -21,78 +22,101 @@ body {
   color: var(--primary-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevent body-level scrolling */
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 h1, h2, h3 {
   color: var(--primary-text);
   font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.5rem; /* Reduced margin */
 }
+
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.1rem; }
+h3 { font-size: 0.9rem; }
 
 p {
   color: var(--secondary-text);
-  line-height: 1.6;
+  line-height: 1.4; /* Reduced line height */
+  margin: 0 0 0.5rem 0;
 }
 
 /* --- 2. Main Layout Containers --- */
 .header-container {
-  padding: 1.0rem 2rem;
+  padding: 0.75rem 1.5rem; /* Reduced padding */
   text-align: center;
   background-color: var(--background-white);
   border-bottom: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
+  flex-shrink: 0; /* Prevent header from shrinking */
 }
+.header-container h1 { margin-bottom: 0.25rem; }
+.header-container p { margin-bottom: 0.5rem; }
+
 
 .content-container {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* 2/3 for simulation, 1/3 for explanation */
-  gap: 1rem;
-  padding: 1rem 2rem 2rem 2rem; /* reduced top padding */
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem; /* Reduced gap */
+  padding: 1rem; /* Reduced padding */
   max-width: 1600px;
   margin: 0 auto;
+  flex-grow: 1; /* Allow content to fill available space */
+  overflow: hidden; /* Prevent container from causing scroll */
 }
 
 .simulation-column {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem; /* Reduced from 1.5rem to 0.75rem */
+  gap: 1rem; /* Reduced gap */
+  min-height: 0; /* Needed for flex-grow to work correctly in some browsers */
 }
 
 .explanation-column {
   background-color: var(--background-white);
-  padding: 1.5rem;
+  padding: 1rem; /* Reduced padding */
   border-radius: 0.75rem;
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
-  height: fit-content;
-  max-height: 85vh;
-  overflow-y: auto;
+  display: flex; /* Use flexbox to manage internal height */
+  flex-direction: column;
+  overflow-y: auto; /* Allow internal scrolling if content overflows */
 }
-
-.explanation-column h2 {
-  margin-top: 0;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.75rem;
-}
+.explanation-column h2 { padding-bottom: 0.5rem; }
 
 #explanation-text h3 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--primary-accent);
+  margin-bottom: 0.25rem;
+}
+
+#challenges-text h3 {
+  font-size: 0.9rem;
+  color: var(--challenge-accent);
+  margin-bottom: 0.25rem;
+}
+
+#explanation-text p, #explanation-text li,
+#challenges-text p, #challenges-text li {
+  font-size: 0.8rem; /* Reduced font size */
+  line-height: 1.4;
+}
+
+#explanation-text ul, #challenges-text ul {
+  padding-left: 1rem;
+  margin-top: 0.25rem;
   margin-bottom: 0.5rem;
 }
 
-#explanation-text p, #explanation-text li {
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-#explanation-text ul {
-  padding-left: 1.2rem;
-  margin-top: 0.5rem;
-}
 
 .dashboard-container {
   position: relative;
-  flex-grow: 1; /* Allows dashboard to fill space */
+  flex-grow: 1;
   display: flex;
   align-items: center;
 }
@@ -107,139 +131,124 @@ p {
 
 /* --- 3. Controls & Buttons --- */
 button {
-  margin: 0.25rem 0.5rem 0.25rem 0;
-  padding: 0.6rem 1.2rem;
+  margin: 0.25rem 0.25rem 0 0;
+  padding: 0.4rem 0.8rem; /* Reduced padding */
   background-color: var(--primary-accent);
   color: white;
   border: none;
   border-radius: 0.375rem;
   cursor: pointer;
   font-weight: 500;
+  font-size: 0.8rem; /* Reduced font size */
   transition: background-color 0.2s ease-in-out;
 }
-button:hover {
-  background-color: var(--primary-accent-hover);
-}
-button:disabled {
-  background-color: #cbd5e0;
-  cursor: not-allowed;
-}
+button:hover { background-color: var(--primary-accent-hover); }
+button:disabled { background-color: #cbd5e0; cursor: not-allowed; }
+button.btn-active { background-color: var(--primary-accent-hover); box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
 
-button.btn-active {
-  background-color: var(--primary-accent-hover);
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.step-nav {
-  margin-top: 1rem;
-  text-align: center;
-}
-.step-nav button {
-  background-color: #e2e8f0;
-  color: var(--primary-text);
-}
-.step-nav button:hover {
-  background-color: #cbd5e0;
-}
+.step-nav { margin-top: 0.5rem; text-align: center; }
+.step-nav button { background-color: #e2e8f0; color: var(--primary-text); }
+.step-nav button:hover { background-color: #cbd5e0; }
 
 /* --- 4. Agent Dashboard & Cards --- */
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
+  gap: 1rem; /* Reduced gap */
   width: 100%;
 }
 
 .agent-card {
-  padding: 0.5rem;
+  padding: 0.75rem; /* Reduced padding */
   background-color: var(--background-white);
   border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   position: relative;
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
   text-align: center;
+  /* IMPROVED ANIMATION */
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out, border-color 0.3s ease;
+}
+.agent-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.agent-card h3 { margin: 0.25rem 0 0.25rem 0; font-size: 0.9rem; }
+.agent-card p { margin: 0; font-size: 0.75rem; }
+
+/* NEW rule for agent descriptions */
+.agent-card p.agent-desc {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    color: var(--secondary-text);
+    margin: 0.25rem 0.1rem 0.5rem 0.1rem; /* top right bottom left */
+    min-height: 3rem; /* Helps align card heights */
 }
 
-.agent-card:hover {
-  transform: translateY(-2px);
+
+/* IMPROVED ANIMATION: New rule for active card */
+.agent-card.active {
+  transform: translateY(-2px) scale(1.03);
+  border-color: var(--primary-accent);
   box-shadow: var(--shadow-md);
 }
 
-.agent-card h3 {
-  margin: 0.5rem 0 0.25rem 0;
-  font-size: 1rem;
-}
-
-.agent-card p {
-  margin: 0;
-  font-size: 0.875rem;
-}
-
+/* IMPROVED ANIMATION: Added transitions to status */
 .status.active {
   color: #2f855a; /* Green */
   font-weight: 600;
+  transition: color 0.3s ease-in-out;
 }
-
 .status.idle {
   color: var(--secondary-text);
+  transition: color 0.3s ease-in-out;
 }
+
 
 /* --- 5. Simulation Log & Bubbles --- */
 .log-container {
   background-color: var(--background-white);
   border: 1px solid var(--border-color);
   border-radius: 0.75rem;
-  padding: 1.5rem;
+  padding: 0.5rem 1rem; /* Reduced padding */
+  flex-shrink: 0; /* Prevent log from shrinking too much */
 }
-.simulation-log {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-.simulation-log h3 {
-  margin: 0.2rem 0 0.2rem 0;
-  text-align: center;
-}
+.simulation-log { display: flex; flex-direction: column; }
+.simulation-log h3 { margin-bottom: 0.5rem; text-align: center; }
 
 pre#scenarioLog {
   background: var(--background-light);
-  padding: 0.5rem;
+  padding: 0.75rem; /* Reduced padding */
   border: 1px solid var(--border-color);
   border-radius: 0.375rem;
   white-space: pre-wrap;
   word-wrap: break-word;
-  min-height: 100px;
+  min-height: 60px; /* Reduced min-height */
   font-family: 'Menlo', 'Monaco', monospace;
-  font-size: 0.875rem;
+  font-size: 0.75rem; /* Reduced font size */
   color: var(--primary-text);
+  overflow-y: auto; /* Allow internal scrolling if needed */
 }
 
 #humanInputContainer {
-  padding: 0.5rem;
-  background-color: #fefcbf; /* Light Yellow */
+  padding: 0.5rem; /* Reduced padding */
+  background-color: #fefcbf;
   border: 1px solid #f6e05e;
   border-radius: 0.375rem;
-  margin-top: 4px;
+  margin-top: 5px;
   text-align: center;
 }
-#humanInputContainer button {
-  background-color: #f6e05e;
-  color: var(--primary-text);
-}
+#humanInputContainer button { background-color: #f6e05e; color: var(--primary-text); }
+#humanInputContainer p { margin-bottom: 0.25rem; }
 
 .bubble {
   position: absolute;
-  bottom: -40px; 
+  top: -30px; /* Adjusted position */
   left: 50%;
   transform: translateX(-50%);
   width: max-content;
   max-width: 150px;
   background-color: var(--primary-text);
   color: var(--background-white);
-  padding: 0.5rem 0.75rem;
+  padding: 0.4rem 0.6rem; /* Reduced padding */
   border-radius: 0.5rem;
-  font-size: 0.8rem;
+  font-size: 0.7rem; /* Reduced font size */
   font-weight: 500;
   opacity: 0;
   transition: all 0.3s ease-in-out;
@@ -247,9 +256,11 @@ pre#scenarioLog {
   box-shadow: var(--shadow-md);
 }
 
+/* IMPROVED ANIMATION: Bouncy effect */
 .bubble.show {
   opacity: 1;
   transform: translateX(-50%) translateY(-5px);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 .bubble.typing::after { content: '...'; animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 1; } }
@@ -257,7 +268,7 @@ pre#scenarioLog {
 
 /* --- 6. Log Entry Styling --- */
 .log-event, .log-learning, .log-optimized, .log-end {
-  padding: 0.25rem 0.5rem;
+  padding: 0.2rem 0.4rem;
   border-radius: 0.25rem;
   display: block;
   margin-bottom: 2px;
@@ -269,8 +280,8 @@ pre#scenarioLog {
     text-align: center;
     font-weight: 600;
     color: var(--primary-accent);
-    padding: 1rem;
-    margin-top: 1rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
     background-color: #ebf8ff;
     border: 1px solid var(--border-color);
 }
