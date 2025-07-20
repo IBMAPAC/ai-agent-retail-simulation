@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RetailWorld Agentic AI Simulation</title>
+  <title>Agentic AI Simulation</title>
   <link rel="stylesheet" href="styles.css" />
   <script src="main.js"></script>
 </head>
 <body>
 
   <div class="header-container">
-    <h1>RetailWorld Agentic AI Simulation</h1>
-    <p>Choose a scenario to simulate agentic AI behavior in retail:</p>
+    <h1></h1>
+    <p></p>
     <div>
       </div>
   </div>
@@ -22,42 +22,12 @@
       <div class="dashboard-container">
         <canvas id="arrowCanvas"></canvas>
         <div class="dashboard-grid">
-          <div class="agent-card" id="forecasting">
-            <div class="bubble" id="bubble-forecasting"></div>
-            <h3>📊 Forecasting</h3>
-            <p class="agent-desc">Analyzes historical data to predict future sales and demand.</p>
-            <p>Agent Status: <span class="status idle">Idle</span></p>
-          </div>
-          <div class="agent-card" id="diagnostics">
-            <div class="bubble" id="bubble-diagnostics"></div>
-            <h3>🛠️ Diagnostics</h3>
-            <p class="agent-desc">Analyzes data to find root causes and predict business impact.</p>
-            <p>Agent Status: <span class="status idle">Idle</span></p>
-          </div>
-          <div class="agent-card" id="planner">
-            <div class="bubble" id="bubble-planner"></div>
-            <h3>🎯 Planner</h3>
-            <p class="agent-desc">Generates and models strategic response plans to achieve goals.</p>
-            <p>Agent Status: <span class="status idle">Idle</span></p>
-          </div>
-          <div class="agent-card" id="procurement">
-            <div class="bubble" id="bubble-procurement"></div>
-            <h3>📝 Procurement</h3>
-            <p class="agent-desc">Manages supplier interactions and inventory purchase data.</p>
-            <p>Agent Status: <span class="status idle">Idle</span></p>
-          </div>
-          <div class="agent-card" id="logistics">
-            <div class="bubble" id="bubble-logistics"></div>
-            <h3>📦 Logistics</h3>
-            <p class="agent-desc">Handles physical inventory movement and supply chain execution.</p>
-            <p>Agent Status: <span class="status idle">Idle</span></p>
-          </div>
-          <div class="agent-card" id="learning">
-            <div class="bubble" id="bubble-learning"></div>
-            <h3>🔁 Learning</h3>
-            <p class="agent-desc">Analyzes past events to improve future processes and models.</p>
-            <p>Agent Status: <span class="status idle">Idle</span></p>
-          </div>
+          <div class="agent-card" id="agent1"><h3 id="agent1-h3"></h3><div class="bubble" id="bubble-agent1"></div><p id="agent1-desc" class="agent-desc"></p><p>Agent Status: <span class="status idle">Idle</span></p></div>
+          <div class="agent-card" id="agent2"><h3 id="agent2-h3"></h3><div class="bubble" id="bubble-agent2"></div><p id="agent2-desc" class="agent-desc"></p><p>Agent Status: <span class="status idle">Idle</span></p></div>
+          <div class="agent-card" id="agent3"><h3 id="agent3-h3"></h3><div class="bubble" id="bubble-agent3"></div><p id="agent3-desc" class="agent-desc"></p><p>Agent Status: <span class="status idle">Idle</span></p></div>
+          <div class="agent-card" id="agent4"><h3 id="agent4-h3"></h3><div class="bubble" id="bubble-agent4"></div><p id="agent4-desc" class="agent-desc"></p><p>Agent Status: <span class="status idle">Idle</span></p></div>
+          <div class="agent-card" id="agent5"><h3 id="agent5-h3"></h3><div class="bubble" id="bubble-agent5"></div><p id="agent5-desc" class="agent-desc"></p><p>Agent Status: <span class="status idle">Idle</span></p></div>
+          <div class="agent-card" id="agent6"><h3 id="agent6-h3"></h3><div class="bubble" id="bubble-agent6"></div><p id="agent6-desc" class="agent-desc"></p><p>Agent Status: <span class="status idle">Idle</span></p></div>
         </div>
       </div>
 
@@ -76,7 +46,7 @@
     <div class="explanation-column">
       <h2>Agentic AI Differentiators</h2>
       <div id="explanation-text">
-        <p>Select a scenario to begin. As the simulation runs, this panel will explain how the agents' actions provide value beyond traditional automation.</p>
+        <p>Select a scenario to begin. This panel will explain how the agents' actions provide value beyond traditional automation.</p>
       </div>
 
       <h2 style="margin-top: 2rem;">Potential Agentic AI Risks</h2>
