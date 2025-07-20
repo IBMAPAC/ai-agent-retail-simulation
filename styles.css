@@ -36,7 +36,7 @@ h1, h2, h3 {
   margin-bottom: 0.5rem; /* Reduced margin */
 }
 
-h1 { font-size: 1.5rem; }
+h1 { font-size: 1.4rem; }
 h2 { font-size: 1.1rem; }
 h3 { font-size: 0.9rem; }
 
@@ -56,8 +56,10 @@ p {
   flex-shrink: 0; /* Prevent header from shrinking */
 }
 .header-container h1 { margin-bottom: 0.25rem; }
-.header-container p { margin-bottom: 0.5rem; }
-
+.header-container p {
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem; /* Add this line to reduce the font size */
+}
 
 .content-container {
   display: grid;
@@ -103,7 +105,7 @@ p {
 
 #explanation-text p, #explanation-text li,
 #challenges-text p, #challenges-text li {
-  font-size: 0.8rem; /* Reduced font size */
+  font-size: 0.8rem;
   line-height: 1.4;
 }
 
@@ -154,42 +156,38 @@ button.btn-active { background-color: var(--primary-accent-hover); box-shadow: i
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem; /* Reduced gap */
+  gap: 1rem;
   width: 100%;
 }
 
 .agent-card {
-  padding: 0.75rem; /* Reduced padding */
+  padding: 0.75rem;
   background-color: var(--background-white);
   border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   position: relative;
   text-align: center;
-  /* IMPROVED ANIMATION */
   transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out, border-color 0.3s ease;
 }
-.agent-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.agent-card h3 { margin: 0.25rem 0 0.25rem 0; font-size: 0.9rem; }
-.agent-card p { margin: 0; font-size: 0.75rem; }
 
-/* NEW rule for agent descriptions */
+.agent-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.agent-card h3 { margin: 0.25rem 0 0.25rem 0; font-size: 0.95rem; }
+.agent-card p { margin: 0; font-size: 0.8rem; }
+
 .agent-card p.agent-desc {
     font-size: 0.7rem;
     line-height: 1.3;
     color: var(--secondary-text);
-    margin: 0.25rem 0.1rem 0.5rem 0.1rem; /* top right bottom left */
+    margin: 0.25rem 0.1rem 0.2rem 0.1rem; /* Reduced bottom margin */
     min-height: 3rem; /* Helps align card heights */
 }
 
-
-/* IMPROVED ANIMATION: New rule for active card */
 .agent-card.active {
   transform: translateY(-2px) scale(1.03);
   border-color: var(--primary-accent);
   box-shadow: var(--shadow-md);
 }
 
-/* IMPROVED ANIMATION: Added transitions to status */
 .status.active {
   color: #2f855a; /* Green */
   font-weight: 600;
@@ -221,7 +219,7 @@ pre#scenarioLog {
   word-wrap: break-word;
   min-height: 60px; /* Reduced min-height */
   font-family: 'Menlo', 'Monaco', monospace;
-  font-size: 0.75rem; /* Reduced font size */
+  font-size: 0.70rem;
   color: var(--primary-text);
   overflow-y: auto; /* Allow internal scrolling if needed */
 }
@@ -234,21 +232,25 @@ pre#scenarioLog {
   margin-top: 5px;
   text-align: center;
 }
-#humanInputContainer button { background-color: #f6e05e; color: var(--primary-text); }
-#humanInputContainer p { margin-bottom: 0.25rem; }
+#humanInputContainer button { background-color: #f6e05e; color: var(--primary-text); font-size: 0.75rem;}
+#humanInputContainer p {
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
 
 .bubble {
   position: absolute;
-  top: -30px; /* Adjusted position */
+  top: 45px; /* MODIFIED: Positioned below the title */
   left: 50%;
   transform: translateX(-50%);
   width: max-content;
   max-width: 150px;
   background-color: var(--primary-text);
   color: var(--background-white);
-  padding: 0.4rem 0.6rem; /* Reduced padding */
+  padding: 0.4rem 0.6rem;
   border-radius: 0.5rem;
-  font-size: 0.7rem; /* Reduced font size */
+  font-size: 0.75rem;
   font-weight: 500;
   opacity: 0;
   transition: all 0.3s ease-in-out;
@@ -256,10 +258,9 @@ pre#scenarioLog {
   box-shadow: var(--shadow-md);
 }
 
-/* IMPROVED ANIMATION: Bouncy effect */
 .bubble.show {
   opacity: 1;
-  transform: translateX(-50%) translateY(-5px);
+  transform: translateX(-50%) scale(1); /* MODIFIED: Adjusted for new position */
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 .bubble.typing::after { content: '...'; animation: blink 1s steps(1) infinite; }
@@ -284,4 +285,35 @@ pre#scenarioLog {
     margin-top: 0.5rem;
     background-color: #ebf8ff;
     border: 1px solid var(--border-color);
+}
+
+/* --- 7. Responsive Design for Tablets (e.g., iPad) --- */
+@media (max-width: 1024px) {
+
+  body {
+    height: auto;
+    overflow: auto;
+  }
+
+  .content-container {
+    grid-template-columns: 1fr;
+    padding: 0.75rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .header-container {
+    padding: 0.75rem 1rem;
+  }
+
+  h1 { font-size: 1.25rem; }
+  .agent-card h3 { font-size: 0.85rem; }
+  .agent-card p.agent-desc { min-height: initial; }
+  
+  .bubble {
+    z-index: 20;
+  }
 }
